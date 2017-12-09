@@ -3,7 +3,7 @@ import pygame
 
 pygame.init()
 clock = pygame.time.Clock()
-disp_w = 600
+disp_w = 1000
 disp_h = 600
 gameDisplay = pygame.display.set_mode((disp_w,disp_h))
 white = (40,40,40)
@@ -17,15 +17,21 @@ for idx in run_idx:
     img.append(img_i)
 
 i = 0
-run = 1
-while run == 1:
+done = 0
+while done != 1:
     gameDisplay.fill(white)
+    keys = pygame.key.get_pressed()
+    pygame.event.get() # this line is must to have following get_pressed
+    if keys[pygame.K_RIGHT]:
+        i = i + 1
+        #print("i=",i,"\n")
+    elif keys[pygame.K_ESCAPE]:
+        done = 1
     if i == len(run_idx):
-        i = 0
+       i = 0     
     img_get = img[i]
     gameDisplay.blit(img_get,(20,20))
-    i = i + 1
     pygame.display.flip()
-    clock.tick(5)
+    clock.tick(32)
 
 pygame.quit()
