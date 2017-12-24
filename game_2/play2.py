@@ -60,7 +60,7 @@ for idx in run_idx:
     rect.append(img_i.get_rect())
     img.append(img_i)
 
-princess_num = 25
+princess_num = 26
 
 for idx in range(1,princess_num):
     pic_file = 'p'+str(idx)+'.png'
@@ -87,7 +87,7 @@ w2_x = numpy.round(disp_w*8/10)
 
 
 #latin = string.ascii_letters+"123456789"
-latin = ['ㄅ','ㄆ','ㄇ','ㄈ','大','小','中','羽','陳','ㄉ','ㄊ','ㄋ','ㄌ','ㄐ','ㄑ','ㄒ','ㄖ']
+latin = ['一','二','三','四','五','六','七','八','九','十','ㄅ','ㄆ','ㄇ','ㄈ','大','小','中','羽','姵','陳','ㄉ','ㄊ','ㄋ','ㄌ','ㄐ','ㄑ','ㄒ','ㄖ','ㄏ','山','水','葉','不','ㄣ','一','ㄩ','ㄟ','ㄝ','ㄔ']
 #latin=['a','b']
 
 listen = 0
@@ -217,9 +217,7 @@ while done != 1:
         #inflat = 2
         pygame.mixer.music.load("correct.mp3")
         pygame.mixer.music.play()
-        time.sleep(4)
-        if score > 20:
-           gameDisplay.blit(princess[0],(500,300))    
+        time.sleep(4) 
     if y_w > numpy.round(disp_h*99/100) or y_w == 0:
         y_w = 0
         w1_x = random.randrange(10,numpy.round(disp_w*9/10))
@@ -230,7 +228,9 @@ while done != 1:
     w3 = f1.render(str(score),True,(20,20,250))
 
 
-    princess_idx = numpy.int_(numpy.round(score/20)) 
+    princess_idx = numpy.int_(numpy.round(score/20))
+    if princess_idx > princess_num :
+       exit()                       
     
     if princess_idx >= 0 and princess_idx < princess_num:
        #print(princess_idx) 
@@ -250,10 +250,10 @@ while done != 1:
 
 pygame.quit()
 
-print("w1:",w1_x," ",w1_y,"\n")
-print("w2:",w2_x," ",w2_y,"\n")
-print("p:",x," ",y,"\n")
-print("distance:",dist_w1,"\n")
+#print("w1:",w1_x," ",w1_y,"\n")
+#print("w2:",w2_x," ",w2_y,"\n")
+#print("p:",x," ",y,"\n")
+#print("distance:",dist_w1,"\n")
 
 
 

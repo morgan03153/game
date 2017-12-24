@@ -39,23 +39,24 @@ disp_h = 600
 gameDisplay = pygame.display.set_mode((disp_w,disp_h))
 white = (40,40,40)
 
-run_idx = ['008','009','010','011','012','013']
+run_idx = ['1','2','3','4','5','6']
 
-wall = pygame.image.load("wall.png")
-wall_inv = pygame.transform.flip(wall,False,True)
+wall = pygame.image.load("long_b.png")
+#wall = pygame.image.load("wall.png")
+#wall_inv = pygame.transform.flip(wall,False,True)
 
-def full_wall():
-    gameDisplay.blit(wall,(0,310))
-    gameDisplay.blit(wall,(500,310))
-    gameDisplay.blit(wall_inv,(0,50))
-    gameDisplay.blit(wall_inv,(500,50))
+def full_wall(x):
+    gameDisplay.blit(wall,(x-100,100))
+    #gameDisplay.blit(wall,(500,310))
+    #gameDisplay.blit(wall_inv,(0,50))
+    #gameDisplay.blit(wall_inv,(500,50))
 
 
 img = []
 princess = []
 rect = []
 for idx in run_idx:
-    pic_file = 'run_'+str(idx)+'.png'
+    pic_file = 'm'+str(idx)+'.png'
     img_i = pygame.image.load(pic_file)
     rect.append(img_i.get_rect())
     img.append(img_i)
@@ -86,6 +87,7 @@ w1_x = numpy.round(disp_w*2/10)
 w2_x = numpy.round(disp_w*8/10)
 
 
+#latin = ['apple','milk','egg','animal']
 latin = string.ascii_letters+"123456789"
 #latin = ['ㄅ','ㄆ','ㄇ','ㄈ','大','小','中','羽','陳']
 #latin=['a','b']
@@ -134,6 +136,8 @@ while done != 1:
     gameDisplay.fill(white)
     keys = pygame.key.get_pressed()
     pygame.event.get() # this line is must to have following get_pressed
+    
+    
     if keys[pygame.K_RIGHT]:
         i = i + 1
         x = x + x_inc
@@ -203,7 +207,7 @@ while done != 1:
         #time.sleep(4)
         img_get = pygame.transform.scale(img_get,[250,400])
         inflat = 0
-    full_wall()
+    full_wall(numpy.round((500-x)/10))
     y_w = y_w + y_w_inc
     w1_y = y_w
     w2_y = y_w
@@ -216,8 +220,8 @@ while done != 1:
         pygame.mixer.music.load("correct.mp3")
         pygame.mixer.music.play()
         time.sleep(4)
-        if score > 20:
-           gameDisplay.blit(princess[0],(500,300))    
+        #if score > 20:
+        #   gameDisplay.blit(princess[0],(500,300))    
     if y_w > numpy.round(disp_h*99/100) or y_w == 0:
         y_w = 0
         w1_x = random.randrange(10,numpy.round(disp_w*9/10))
